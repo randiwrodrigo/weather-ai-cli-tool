@@ -25,6 +25,17 @@ export async function getCoordinates(city: string): Promise<Coordinates> {
   return data[0]!;
 }
 
+export async function getWeather(
+  city: string
+): Promise<CurrentWeather> {
+  const coordinates = await getCoordinates(city);
+
+  return await getCurrentWeather(
+    coordinates.lat,
+    coordinates.lon
+  );
+}
+
 export async function getCurrentWeather(
   lat: number,
   lon: number
@@ -64,13 +75,3 @@ export async function getCurrentWeather(
     };
 }
 
-export async function getWeather(
-  city: string
-): Promise<CurrentWeather> {
-  const coordinates = await getCoordinates(city);
-
-  return await getCurrentWeather(
-    coordinates.lat,
-    coordinates.lon
-  );
-}
